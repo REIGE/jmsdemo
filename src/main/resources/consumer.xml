@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="common.xml"/>
+
+    <!--消息监听器-->
+    <bean id="consumerMessageListener" class="com.reige.jmsdemo.springtest.consumer.ConsumerMessageListener"/>
+
+    <!--配置消息监听容器-->
+    <bean id="jsmContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--监听的目的地-->
+        <property name="destination" ref="queueDestination"/>
+        <!--监听器-->
+        <property name="messageListener" ref="consumerMessageListener"/>
+    </bean>
+
+</beans>
